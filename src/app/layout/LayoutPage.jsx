@@ -1,8 +1,24 @@
-
+'use client'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import CardTemperature from '../components/cards/CardTemperature'
 import Navbar from '../components/navbar/Navbar'
 
 const LayoutPage = () => {
+  const [variableData, setVariableData] = useState();
+  
+  useEffect(() => {
+    // Realiza una solicitud HTTP al punto final de tu aplicación
+    axios.post('/webhook-endpoint') // Asegúrate de que esta URL coincida con la configuración del Webhook en Particle Console
+      .then((response) => {
+        // Procesa los datos recibidos
+        setVariableData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener datos:', error);
+      });
+  }, []);
+
   return (
     <main className='bg-slate-50 min-h-screen'>
       <Navbar/>
@@ -15,7 +31,7 @@ const LayoutPage = () => {
       </div>
       {/* aqui estaran las cards */}
       <div className='bg-white m-2 shadow-sm p-2 rounded-md'>
-          <CardTemperature/>
+          <CardTemperature title='Temperatura' data={variableData} />
       </div>
 
     </main>
