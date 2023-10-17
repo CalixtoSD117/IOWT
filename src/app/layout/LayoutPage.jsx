@@ -8,11 +8,17 @@ const LayoutPage = () => {
   const [variableData, setVariableData] = useState();
   
   useEffect(() => {
+    const headers = {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+        
     // Realiza una solicitud HTTP al punto final de tu aplicación
-    axios.post('/webhook-endpoint') // Asegúrate de que esta URL coincida con la configuración del Webhook en Particle Console
+    axios.post('https://iowt.vercel.app/dashboardpage')// Asegúrate de que esta URL coincida con la configuración del Webhook en Particle Console
       .then((response) => {
         // Procesa los datos recibidos
         setVariableData(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error('Error al obtener datos:', error);

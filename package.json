@@ -13,6 +13,7 @@
     "axios": "^1.5.1",
     "lodash": "^4.17.21",
     "next": "13.5.4",
+    "particle-api-js": "^10.2.0",
     "react": "^18",
     "react-dom": "^18",
     "react-gauge-chart": "^0.4.1",

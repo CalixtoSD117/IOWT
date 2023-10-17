@@ -1,8 +1,6 @@
-'use client'
-import { useState } from 'react';
 import GaugeChart from 'react-gauge-chart';
 
-const CardTemperature = ({ title = "change the title", data=0 }) => {
+const CardTemperature = ({ title = "change the title", data}) => {
 
 
   return (
