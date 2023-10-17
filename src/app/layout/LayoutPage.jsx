@@ -13,7 +13,12 @@ const LayoutPage = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.post('https://iowt.vercel.app/dashboardpage');
+        const response = await axios.post('https://iowt.vercel.app/dashboardpage', null, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
         setVariableData(response.data);
         setLoading(false);
       } catch (error) {
