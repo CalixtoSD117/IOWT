@@ -1,47 +1,50 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import CardTemperature from '../components/cards/CardTemperature'
-import Navbar from '../components/navbar/Navbar'
+import CardTemperature from '../components/cards/CardTemperature';
+import Navbar from '../components/navbar/Navbar';
 
 const LayoutPage = () => {
-  const [variableData, setVariableData] = useState();
-  
+  const [variableData, setVariableData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    const headers = {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    }
-        
-    // Realiza una solicitud HTTP al punto final de tu aplicación
-    axios.post('https://iowt.vercel.app/dashboardpage')// Asegúrate de que esta URL coincida con la configuración del Webhook en Particle Console
-      .then((response) => {
-        // Procesa los datos recibidos
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.post('https://iowt.vercel.app/dashboardpage');
         setVariableData(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error('Error al obtener datos:', error);
-      });
+        setLoading(false);
+      } catch (error) {
+        setError('Error al obtener datos. Por favor, inténtalo de nuevo.');
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
     <main className='bg-slate-50 min-h-screen'>
-      <Navbar/>
+      <Navbar />
 
-      <div className='mx-auto p-2 '>
-        <h1 className='text-2xl font-semibold'>
-          DashBoard
-        </h1>
+      <div className='mx-auto p-2'>
+        <h1 className='text-2xl font-semibold'>Dashboard</h1>
         <hr className='border-blue-700' />
       </div>
-      {/* aqui estaran las cards */}
+
       <div className='bg-white m-2 shadow-sm p-2 rounded-md'>
+        {loading ? (
+          <p>Cargando datos...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
           <CardTemperature title='Temperatura' data={variableData} />
+        )}
       </div>
-
     </main>
-  )
-}
+  );
+};
 
-export default LayoutPage
+export default LayoutPage;
