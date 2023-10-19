@@ -5,15 +5,15 @@ import CardTemperature from '../components/cards/CardTemperature';
 import Navbar from '../components/navbar/Navbar';
 
 const LayoutPage = () => {
-  const [variableData, setVariableData] = useState(null);
+  const [variableData, setVariableData] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.post('https://iowt.vercel.app/dashboardpage', null, {
+        const response = await axios.post('https://iowt.vercel.app/dashboardpage', true, {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
