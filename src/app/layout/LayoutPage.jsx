@@ -19,6 +19,7 @@ const LayoutPage = () => {
             'Accept': 'application/json'
           }
         });
+        console.log(response.data);
         setVariableData(response.data);
         setLoading(false);
       } catch (error) {
