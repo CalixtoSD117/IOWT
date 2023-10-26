@@ -14,7 +14,9 @@ const LayoutPage = () => {
         // Procesa los datos recibidos
         setVariableData(response.data);
         console.log(response.data);
-        console.log(response.data[0].name)
+        console.log(response.data[0].name);
+        console.log(response.data[0].variables);
+        console.log(response.data[0].variables[0]);
       })
       .catch((error) => {
         console.error('Error al obtener datos:', error);
