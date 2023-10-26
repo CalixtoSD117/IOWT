@@ -1,0 +1,48 @@
+'use client'
+import React, { useEffect, useState } from 'react';
+import Particle from 'particle-api-js';
+import CardTemperature from '../components/cards/CardTemperature';
+import Navbar from '../components/navbar/Navbar';
+
+const LayoutPage = () => {
+  const [token, setToken] = useState(null);
+  const [temperatureData, setTemperatureData] = useState(null);
+
+  useEffect(() => {
+    const loginToParticle = async () => {
+      const particle = new Particle();
+      try {
+        const data = await particle.login({ username: 'ccalixto@ucol.mx', password: 'CarlosJosue' });
+        console.log('Logged in successfully:', data.body.access_token);
+        const accessToken = data.body.access_token; // Obtener el token
+
+        // Utiliza el token obtenido para realizar la solicitud
+        const response = await particle.getVariable({ deviceId: '24357', name: 'temperature', auth: accessToken });
+        console.log('Device variable retrieved successfully:', response.body.result);
+        setToken(accessToken);
+        setTemperatureData(response.body.result);
+      } catch (err) {
+        console.log('Could not log in.', err);
+      }
+    };
+
+    loginToParticle();
+  }, []);
+
+  return (
+    <main className='bg-slate-50 min-h-screen'>
+      <Navbar />
+
+      <div className='mx-auto p-2'>
+        <h1 className='text-2xl font-semibold'>Dashboard</h1>
+        <hr className='border-blue-700' />
+      </div>
+
+      <div className='bg-white m-2 shadow-sm p-2 rounded-md'>
+        <CardTemperature title='Temperatura' data={temperatureData} />
+      </div>
+    </main>
+  );
+};
+
+export default LayoutPage;
