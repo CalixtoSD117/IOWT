@@ -6,29 +6,8 @@ import Navbar from '../components/navbar/Navbar'
 
 const LayoutPage = () => {
   const [variableData, setVariableData] = useState();
-
-  const accessToken = '8c92c2b88dbc84c3b1710596bfa4b49dd5f9935e';
-
-  const getTemperature = async () => {
-    const response = await axios.get('https://api.particle.io/v1/devices', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    const devices = response.data;
-
-    const temperature = devices[0].variables.temperature;
-
-    return temperature;
-  };
-
-  getTemperature().then(temperature => {
-    console.log(`The temperature is ${temperature} degrees Celsius.`);
-  });
-
-
-  useEffect(() => {
+  
+  useEffect(() => {        
     // Realiza una solicitud HTTP al punto final de tu aplicación
     axios.get('https://api.particle.io/v1/devices?access_token=8c92c2b88dbc84c3b1710596bfa4b49dd5f9935e')// Asegúrate de que esta URL coincida con la configuración del Webhook en Particle Console
       .then((response) => {
@@ -46,7 +25,7 @@ const LayoutPage = () => {
 
   return (
     <main className='bg-slate-50 min-h-screen'>
-      <Navbar />
+      <Navbar/>
 
       <div className='mx-auto p-2 '>
         <h1 className='text-2xl font-semibold'>
@@ -56,7 +35,7 @@ const LayoutPage = () => {
       </div>
       {/* aqui estaran las cards */}
       <div className='bg-white m-2 shadow-sm p-2 rounded-md'>
-        <CardTemperature title='Temperatura' data={variableData} />
+          <CardTemperature title='Temperatura' data={variableData} />
       </div>
 
     </main>
