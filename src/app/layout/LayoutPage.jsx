@@ -9,7 +9,7 @@ const LayoutPage = () => {
   
   useEffect(() => {        
     // Realiza una solicitud HTTP al punto final de tu aplicación
-    axios.get('asdasd')// Asegúrate de que esta URL coincida con la configuración del Webhook en Particle Console
+    axios.get('https://iowt.vercel.app/api')// Asegúrate de que esta URL coincida con la configuración del Webhook en Particle Console
       .then((response) => {
         // Procesa los datos recibidos
         setVariableData(response.data);
