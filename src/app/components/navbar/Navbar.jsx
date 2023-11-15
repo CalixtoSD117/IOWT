@@ -10,9 +10,7 @@ const Navbar = () => {
         </div>
 
         <div>
-            <button>
-                Go out 
-            </button>
+           
         </div>
     </nav>
   )

@@ -1,6 +1,6 @@
 import GaugeChart from 'react-gauge-chart';
 
-const CardTemperature = ({ title = "change the title", data}) => {
+const CardTemperature = ({ title = "change the title", data, datatitle, simbol, limite, colors, lines}) => {
 
 
   return (
@@ -13,16 +13,16 @@ const CardTemperature = ({ title = "change the title", data}) => {
         id="temperature-gauge"
         textColor="#000000"
         nrOfLevels={10}
-        arcsLength={[ 0.2,0.3, 0.3, 0.2]}
-        colors={['blue','green', '#ffa500', '#ff0000']}
-        percent={data / 100}
+        arcsLength={lines}
+        colors={colors}
+        percent={data / limite}
         hideText 
       />
       
       
       </div>
 
-      <p>Temperatura: <span className='font-medium'>{data} °C</span> </p>
+      <p>{datatitle} <span className='font-medium'>{data} {simbol}</span> </p>
 
     </div>
   )
